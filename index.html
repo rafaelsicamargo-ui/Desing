@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Rafael Camargo — Arquivo Criativo & Direção de Arte</title>
+  <meta name="description" content="Uma documentação visual focada em motion design, edição de vídeo, identidade visual e criativos de performance." />
+
+  <!-- Favicon minimalista -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>" />
+
+  <!-- Tipografia: EXCLUSIVAMENTE Plus Jakarta Sans (zero distorção em qualquer peso) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            surface: {
+              DEFAULT: '#09090b',
+              card: '#111115',
+              hover: '#17171d',
+              border: 'rgba(255, 255, 255, 0.08)',
+              borderHover: 'rgba(255, 255, 255, 0.2)',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: #09090b;
+      color: #fafafa;
+    }
+
+    /* Granulação analógica ultra discreta para textura editorial */
+    .bg-noise {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+
+    /* Scrollbar minimalista */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #09090b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #27272a;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3f3f46;
+    }
+
+    /* Transição dos cards */
+    .media-card {
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.4s ease;
+    }
+    .media-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.7);
+    }
+  </style>
+</head>
+<body class="bg-[#09090b] text-zinc-100 font-sans selection:bg-zinc-200 selection:text-black min-h-screen relative overflow-x-hidden">
+
+  <!-- Luz ambiente de fundo sutil (Dark Mode refinado) -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div class="absolute -top-[15%] left-1/2 -translate-x-1/2 w-[700px] h-[450px] bg-gradient-to-b from-zinc-800/10 via-zinc-900/5 to-transparent blur-[140px] rounded-full"></div>
+    <div id="spotlight" class="absolute inset-0 pointer-events-none opacity-0 md:opacity-100 transition-opacity duration-300" style="background: radial-gradient(650px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh), rgba(255, 255, 255, 0.025), transparent 70%);"></div>
+    <div class="absolute inset-0 bg-noise opacity-60"></div>
+  </div>
+
+  <!-- ==================== 1. HEADER & NAVBAR ==================== -->
+  <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-xl bg-[#09090b]/80 border-b border-white/[0.06]" id="main-header">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 h-16 sm:h-20 flex items-center justify-between">
+      
+      <!-- Assinatura / Identificação limpa -->
+      <a href="#" class="group flex items-center gap-3 focus:outline-none">
+        <span class="w-2 h-2 rounded-full bg-zinc-200"></span>
+        <div class="flex items-center gap-2">
+          <span class="font-semibold text-sm tracking-tight text-white group-hover:text-zinc-300 transition-colors">
+            Rafael Camargo
+          </span>
+          <span class="text-zinc-600 font-light">/</span>
+          <span class="text-xs uppercase tracking-widest text-zinc-400 font-medium hidden sm:inline-block">
+            Arquivo Criativo
+          </span>
+        </div>
+      </a>
+
+      <!-- Menu Minimalista Desktop -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="#galeria" class="text-xs uppercase tracking-widest text-zinc-400 hover:text-white transition-colors duration-200 font-medium">
+          Galeria
+        </a>
+        <a href="#competencias" class="text-xs uppercase tracking-widest text-zinc-400 hover:text-white transition-colors duration-200 font-medium">
+          Disciplinas
+        </a>
+        <a href="#contato" class="text-xs uppercase tracking-widest text-zinc-400 hover:text-white transition-colors duration-200 font-medium">
+          Contato
+        </a>
+      </nav>
+
+      <!-- Botão Direto WhatsApp no Header -->
+      <div class="hidden sm:flex items-center">
+        <a 
+          href="https://wa.me/5547999364927" 
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-zinc-300 hover:text-white transition-all duration-300 active:scale-95"
+        >
+          <span>WhatsApp</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 opacity-60"></i>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Toggle (Toque Otimizado) -->
+      <button 
+        id="mobile-menu-btn" 
+        class="md:hidden p-2.5 -mr-2 text-zinc-300 hover:text-white focus:outline-none active:scale-90 transition-transform"
+        aria-label="Abrir Menu"
+      >
+        <i data-lucide="menu" id="menu-icon" class="w-5 h-5"></i>
+      </button>
+
+    </div>
+
+    <!-- Menu Mobile (Gaveta com toque aprimorado) -->
+    <div id="mobile-menu" class="hidden md:hidden px-6 pt-3 pb-6 border-b border-white/10 bg-[#09090b]/95 backdrop-blur-2xl">
+      <div class="flex flex-col gap-1">
+        <a href="#galeria" class="mobile-nav-link text-base font-medium text-zinc-300 hover:text-white py-3 border-b border-white/[0.06] flex items-center justify-between">
+          <span>Galeria de Trabalhos</span>
+          <i data-lucide="arrow-right" class="w-4 h-4 opacity-40"></i>
+        </a>
+        <a href="#competencias" class="mobile-nav-link text-base font-medium text-zinc-300 hover:text-white py-3 border-b border-white/[0.06] flex items-center justify-between">
+          <span>Disciplinas & Ferramentas</span>
+          <i data-lucide="arrow-right" class="w-4 h-4 opacity-40"></i>
+        </a>
+        <a href="#contato" class="mobile-nav-link text-base font-medium text-zinc-300 hover:text-white py-3 border-b border-white/[0.06] flex items-center justify-between">
+          <span>Contato</span>
+          <i data-lucide="arrow-right" class="w-4 h-4 opacity-40"></i>
+        </a>
+        
+        <div class="pt-4 flex items-center justify-between">
+          <span class="text-xs text-zinc-500 font-mono">Disponível para novos projetos</span>
+          <a 
+            href="https://wa.me/5547999364927" 
+            target="_blank" 
+            class="text-xs font-semibold text-emerald-400 flex items-center gap-1.5 py-1.5 px-3 rounded-full bg-emerald-500/10 border border-emerald-500/20 active:scale-95 transition-transform"
+          >
+            <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+            <span>WhatsApp</span>
+          </a>
+        </div>
+      </div>
+  </header>
+
+  <main class="relative z-10 pt-16 sm:pt-20">
+
+    <!-- ==================== 2. HERO SECTION (ARQUIVO CRIATIVO) ==================== -->
+    <section class="max-w-6xl mx-auto px-6 sm:px-8 pt-24 pb-16 sm:pt-32 sm:pb-24 flex flex-col justify-between">
+      
+      <!-- Tag de Indexação do Arquivo -->
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] w-fit mb-8">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        <span class="text-[11px] uppercase tracking-widest text-zinc-400 font-medium">Índice Geral de Obras &bull; Seleção</span>
+      </div>
+
+      <!-- Título & Subtítulo (Tom Curatorial / Arquivo de Design) -->
+      <div class="max-w-4xl">
+        <h1 class="font-bold text-3xl sm:text-5xl md:text-6xl tracking-tight leading-[1.12] text-white">
+          Arquivo Criativo & Direção de Arte.
+        </h1>
+        
+        <p class="mt-6 text-base sm:text-lg md:text-xl text-zinc-400 max-w-3xl font-normal leading-relaxed">
+          Uma documentação visual focada em motion design, edição de vídeo, identidade visual e criativos de performance.
+        </p>
+      </div>
+
+      <!-- Indicador Sutil para a Galeria -->
+      <div class="mt-14 pt-6 border-t border-white/[0.06] flex items-center justify-between text-zinc-500 text-xs">
+        <a href="#galeria" class="group inline-flex items-center gap-2.5 text-zinc-400 hover:text-white transition-colors duration-300">
+          <i data-lucide="arrow-down" class="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform"></i>
+          <span class="uppercase tracking-widest text-[11px] font-medium">Ver Acervo de Projetos</span>
+        </a>
+
+        <div class="hidden sm:flex items-center gap-4 text-[11px] uppercase tracking-wider text-zinc-500 font-medium">
+          <span>Motion (9:16)</span>
+          <span>&bull;</span>
+          <span>Editorial (4:5)</span>
+          <span>&bull;</span>
+          <span>Performance (1:1)</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ==================== 3. GALERIA DE PROJETOS (GRID CURADO) ==================== -->
+    <section id="galeria" class="max-w-6xl mx-auto px-6 sm:px-8 py-16 sm:py-24 border-t border-white/[0.06]">
+      
+      <!-- Cabeçalho da Seção -->
+      <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-12 pb-4 border-b border-white/[0.06] gap-2">
+        <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-white">
+          Galeria de Trabalhos
+        </h2>
+        <span class="text-xs text-zinc-500 font-mono">06 itens em exibição</span>
+      </div>
+
+      <!-- Grid de Projetos: 1 Coluna no Mobile, 2 Colunas no Desktop -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+
+        <!-- ========================================================================= -->
+        <!-- LINHA 1: VÍDEOS VERTICAIS (PROPORÇÃO 9:16) COM CONTROLES SOBREPOSTOS     -->
+        <!-- ========================================================================= -->
+
+        <!-- VÍDEO 1 (Motion Design) -->
+        <article class="media-card group bg-surface-card rounded-2xl border border-surface-border hover:border-surface-borderHover overflow-hidden flex flex-col">
+          <div class="relative w-full aspect-[9/16] bg-black overflow-hidden flex items-center justify-center cursor-pointer" onclick="togglePlay('video-item-1', 'btn-play-1', 'icon-play-1')">
+            
+            <video 
+              id="video-item-1"
+              class="w-full h-full object-cover"
+              loop
+              playsinline
+              webkit-playsinline
+              muted
+              preload="metadata"
+            >
+              <source src="Você ainda cobra mensalidade manualmente 👀A BeShark criou um sistema que cobra pelo WhatsApp, e.mp4" type="video/mp4" />
+              <source src="Voc%C3%AA%20ainda%20cobra%20mensalidade%20manualmente%20%F0%9F%91%80A%20BeShark%20criou%20um%20sistema%20que%20cobra%20pelo%20WhatsApp,%20e.mp4" type="video/mp4" />
+              Seu navegador não suporta a tag de vídeo.
+            </video>
+
+            <!-- Gradiente sutil nas extremidades -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none"></div>
+
+            <!-- Botão Play/Pause Central Sobreposto -->
+            <button 
+              type="button"
+              id="btn-play-1"
+              onclick="event.stopPropagation(); togglePlay('video-item-1', 'btn-play-1', 'icon-play-1')"
+              class="absolute z-20 w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white hover:text-black shadow-xl active:scale-95"
+              aria-label="Reproduzir Vídeo"
+            >
+              <i data-lucide="play" class="w-5 h-5 fill-current translate-x-0.5" id="icon-play-1"></i>
+            </button>
+
+            <!-- Botão de Mudo -->
+            <button 
+              type="button"
+              onclick="event.stopPropagation(); toggleMute('video-item-1', 'icon-mute-1')"
+              class="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 w-10 h-10 sm:w-9 sm:h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white flex items-center justify-center hover:bg-white/20 active:scale-90 transition-all"
+              title="Ativar/Desativar Som"
+              aria-label="Controle de Áudio"
+            >
+              <i data-lucide="volume-x" class="w-4 h-4" id="icon-mute-1"></i>
+            </button>
+
+            <!-- Badge de Formato -->
+            <div class="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[10px] tracking-widest uppercase text-zinc-300 font-mono">
+              9:16 &bull; Motion
+            </div>
+
+            <!-- Barra de Progresso do Vídeo -->
+            <div class="absolute bottom-0 left-0 right-0 h-1 bg-white/10 z-20">
+              <div id="progress-1" class="h-full bg-zinc-200 w-0 transition-all duration-100"></div>
+            </div>
+          </div>
+
+          <!-- Metadados / Título / Descrição -->
+          <div class="p-5 sm:p-6 border-t border-white/[0.04] bg-surface-card flex flex-col justify-between flex-grow">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-[11px] font-mono text-zinc-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/[0.06]">
+                  Motion Design
+                </span>
+                <span class="text-[11px] font-mono text-zinc-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/[0.06]">
+                  Edição de Vídeo
+                </span>
+              </div>
+              <h3 class="font-semibold text-base sm:text-lg text-white tracking-tight">
+                Sistema de Cobrança (BeShark)
+              </h3>
+              <p class="mt-2 text-sm text-zinc-400 leading-relaxed font-light">
+                Motion design e edição dinâmica com foco em retenção. Criado para explicar o funcionamento de um software B2B e aumentar a conversão.
+              </p>
+            </div>
+          </div>
+        </article>
+
+
+        <!-- VÍDEO 2 (Edição Imobiliária) -->
+        <article class="media-card group bg-surface-card rounded-2xl border border-surface-border hover:border-surface-borderHover overflow-hidden flex flex-col">
+          <div class="relative w-full aspect-[9/16] bg-black overflow-hidden flex items-center justify-center cursor-pointer" onclick="togglePlay('video-item-2', 'btn-play-2', 'icon-play-2')">
+            
+            <video 
+              id="video-item-2"
+              class="w-full h-full object-cover"
+              loop
+              playsinline
+              webkit-playsinline
+              muted
+              preload="metadata"
+            >
+              <source src="🏡 Seu próximo lar em Perequê pode estar aqui!Apartamento diferenciado com 80 m², semi-mobiliado.mp4" type="video/mp4" />
+              <source src="%F0%9F%8F%A1%20Seu%20pr%C3%B3ximo%20lar%20em%20Perequ%C3%AA%20pode%20estar%20aqui!Apartamento%20diferenciado%20com%2080%20m%C2%B2,%20semi-mobiliado.mp4" type="video/mp4" />
+              Seu navegador não suporta a tag de vídeo.
+            </video>
+
+            <!-- Gradiente sutil -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none"></div>
+
+            <!-- Botão Play/Pause Central Sobreposto -->
+            <button 
+              type="button"
+              id="btn-play-2"
+              onclick="event.stopPropagation(); togglePlay('video-item-2', 'btn-play-2', 'icon-play-2')"
+              class="absolute z-20 w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-white hover:text-black shadow-xl active:scale-95"
+              aria-label="Reproduzir Vídeo"
+            >
+              <i data-lucide="play" class="w-5 h-5 fill-current translate-x-0.5" id="icon-play-2"></i>
+            </button>
+
+            <!-- Botão de Mudo -->
+            <button 
+              type="button"
+              onclick="event.stopPropagation(); toggleMute('video-item-2', 'icon-mute-2')"
+              class="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 w-10 h-10 sm:w-9 sm:h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white flex items-center justify-center hover:bg-white/20 active:scale-90 transition-all"
+              title="Ativar/Desativar Som"
+              aria-label="Controle de Áudio"
+            >
+              <i data-lucide="volume-x" class="w-4 h-4" id="icon-mute-2"></i>
+            </button>
+
+            <!-- Badge de Formato -->
+            <div class="absolute top-3 left-3 sm:top-4 sm:left-4 z-20 px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[10px] tracking-widest uppercase text-zinc-300 font-mono">
+              9:16 &bull; Reels
+            </div>
+
+            <!-- Barra de Progresso do Vídeo -->
+            <div class="absolute bottom-0 left-0 right-0 h-1 bg-white/10 z-20">
+              <div id="progress-2" class="h-full bg-zinc-200 w-0 transition-all duration-100"></div>
+            </div>
+          </div>
+
+          <!-- Metadados / Título / Descrição -->
+          <div class="p-5 sm:p-6 border-t border-white/[0.04] bg-surface-card flex flex-col justify-between flex-grow">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-[11px] font-mono text-zinc-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/[0.06]">
+                  Edição Imobiliária
+                </span>
+                <span class="text-[11px] font-mono text-zinc-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/[0.06]">
+                  Alto Padrão
+                </span>
+              </div>
+              <h3 class="font-semibold text-base sm:text-lg text-white tracking-tight">
+                Apresentação de Imóvel Alto Padrão
+              </h3>
+              <p class="mt-2 text-sm text-zinc-400 leading-relaxed font-light">
+                Material feito especificamente para o mercado imobiliário. Foco em ritmo, transições fluidas e valorização dos espaços para captar leads qualificados em lançamentos.
+              </p>
+            </div>
+          </div>
+        </article>
+
+
+        <!-- ========================================================================= -->
+        <!-- LINHA 2: ARTES VERTICAIS (PROPORÇÃO 4:5) COM OBJECT-COVER                 -->
+        <!-- ========================================================================= -->
+
+        <!-- ARTE 1 (Design Editorial) -->
+        <article class="media-card group bg-surface-card rounded-2xl border border-surface-border hover:border-surface-borderHover overflow-hidden flex flex-col">
+          <div 
+            class="relative w-full aspect-[4/5] bg-zinc-950 overflow-hidden cursor-pointer" 
+            onclick="openLightbox('Imagem%20do%20Codex%2010%20de%20set.%20de%202026,%2015_14_06.png', 'Análise Editorial de Marcas', 'Design Editorial &bull; Identidade Visual')"
+          >
+            <img 
+              src="Imagem%20do%20Codex%2010%20de%20set.%20de%202026,%2015_14_06.png" 
+              alt="Análise Editorial de Marcas"
+              class="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+              loading="lazy"
+              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop';"
+            />
+
+            <!-- Gradiente discreto -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10 pointer-events-none"></div>
+
+            <!-- Botão Expandir / Lightbox (Visível no mobile, sutil no hover desktop) -->
+            <button 
+              type="button"
+              onclick="event.stopPropagation(); openLightbox('Imagem%20do%20Codex%2010%20de%20set.%20de%202026,%2015_14_06.png', 'Análise Editorial de Marcas', 'Design Editorial &bull; Identidade Visual')"
+              class="absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white flex items-center justify-center opacity-90 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-200 hover:bg-white hover:text-black active:scale-90 shadow-lg z-20"
+              title="Expandir Imagem"
+              aria-label="Expandir Imagem"
+            >
+              <i data-lucide="maximize-2" class="w-4 h-4"></i>
+            </button>
+
+            <!-- Badge de Formato -->
+            <div class="absolute top-3 left-3 sm:top-4 sm:left-4 px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[10px] tracking-widest uppercase text-zinc-300 font-mono z-10">
+              4:5 &bull; Editorial
+            </div>
+          </div>
+
+          <!-- Metadados / Título / Descrição -->
+          <div class="p-5 sm:p-6 border-t border-white/[0.04] bg-surface-card flex flex-col justify-between flex-grow">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-[11px] font-mono text-zinc-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/[0.06]">
+                  Design Editorial
+                </span>
+                <span class="text-[11px] font-mono text-zinc-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/[0.06]">
+                  Identidade Visual
+                </span>
+              </div>
+              <h3 class="font-semibold text-base sm:text-lg text-white tracking-tight">
+                Análise Editorial de Marcas
+              </h3>
+              <p class="mt-2 text-sm text-zinc-400 leading-relaxed font-light">
+                Design editorial focado em posicionamento de marca e branding. Uso estratégico de hierarquia tipográfica e contraste para gerar autoridade imediata no feed.
+              </p>
+            </div>
+          </div>
+        </article>
+
+
+        <!-- ARTE 2 (Direção de Arte Premium) -->
+        <article class="media-card group bg-surface-card rounded-2xl border border-surface-border hover:border-surface-borderHover overflow-hidden flex flex-col">
+          <div 
+            class="relative w-full aspect-[4/5] bg-zinc-950 overflow-hidden cursor-pointer" 
+            onclick="openLightbox(this.querySelector('img').src, 'Lifestyle & Marcas Premium', 'Direção de Arte &bull; Fotografia de Luxo')"
+          >
+            <img 
+              src="image (1).png" 
+              alt="Lifestyle & Marcas Premium"
+              class="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+              loading="lazy"
+              onerror="if (this.src.indexOf('5766508e-57b7-4b46-ad31-659eaee91b29.png') === -1) { this.src = '5766508e-57b7-4b46-ad31-659eaee91b29.png'; } else { this.onerror = null; this.src = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1200&auto=format&fit=crop'; }"
+            />
+
+            <!-- Gradiente discreto -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10 pointer-events-none"></div>
+
+            <!-- Botão Expandir / Lightbox -->
+            <button 
+              type="button"
+              onclick="event.stopPropagation(); openLightbox(this.parentElement.querySelector('img').src, 'Lifestyle & Marcas Premium', 'Direção de Arte &bull; Fotografia de Luxo')"
+              class="absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white flex items-center justify-center opacity-90 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-200 hover:bg-white hover:text-black active:scale-90 shadow-lg z-20"
+              title="Expandir Imagem"
+              aria-label="Expandir Imagem"
+            >
+              <i data-lucide="maximize-2" class="w-4 h-4"></i>
+            </button>
+
+            <!-- Badge de Formato -->
+            <div class="absolute top-3 left-3 sm:top-4 sm:left-4 px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[10px] tracking-widest uppercase text-zinc-300 font-mono z-10">
+              4:5 &bull; Fotografia
+            </div>
+          </div>
+
+          <!-- Metadados / Título / Descrição -->
+          <div class="p-5 sm:p-6 border-t border-white/[0.04] bg-surface-card flex flex-col justify-between flex-grow">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-[11px] font-mono text-zinc-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/[0.06]">
+                  Direção de Arte
+                </span>
+                <span class="text-[11px] font-mono text-zinc-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/[0.06]">
+                  Tratamento de Imagem
+                </span>
+              </div>
+              <h3 class="font-semibold text-base sm:text-lg text-white tracking-tight">
+                Lifestyle & Marcas Premium
+              </h3>
+              <p class="mt-2 text-sm text-zinc-400 leading-relaxed font-light">
+                Direção de arte e estética minimalista voltada para o mercado de luxo. Tratamento de cor refinado para elevar o valor percebido do produto.
+              </p>
+            </div>
+          </div>
+        </article>
+
+
+        <!-- ========================================================================= -->
+        <!-- LINHA 3: ARTES QUADRADAS (PROPORÇÃO 1:1) COM OBJECT-COVER                 -->
+        <!-- ========================================================================= -->
+
+        <!-- ARTE 3 (Criativo de Autoridade e Retenção - Maré / Escolher) -->
+        <article class="media-card group bg-surface-card rounded-2xl border border-surface-border hover:border-surface-borderHover overflow-hidden flex flex-col">
+          <div 
+            class="relative w-full aspect-square bg-zinc-950 overflow-hidden cursor-pointer" 
+            onclick="openLightbox(this.querySelector('img').src, 'Criativo de Autoridade e Retenção', 'Interface &bull; Performance &bull; Ecossistema de Marca')"
+          >
+            <img 
+              src="download (34).png" 
+              alt="Criativo de Autoridade e Retenção"
+              class="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+              loading="lazy"
+              onerror="if (!this.triedJpg) { this.triedJpg = true; this.src = 'download (34).jpg'; } else { this.onerror = null; this.src = 'https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1200&auto=format&fit=crop'; }"
+            />
+
+            <!-- Gradiente discreto -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10 pointer-events-none"></div>
+
+            <!-- Botão Expandir / Lightbox -->
+            <button 
+              type="button"
+              onclick="event.stopPropagation(); openLightbox(this.parentElement.querySelector('img').src, 'Criativo de Autoridade e Retenção', 'Interface &bull; Performance &bull; Ecossistema de Marca')"
+              class="absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white flex items-center justify-center opacity-90 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-200 hover:bg-white hover:text-black active:scale-90 shadow-lg z-20"
+              title="Expandir Imagem"
+              aria-label="Expandir Imagem"
+            >
+              <i data-lucide="maximize-2" class="w-4 h-4"></i>
+            </button>
+
+            <!-- Badge de Formato -->
+            <div class="absolute top-3 left-3 sm:top-4 sm:left-4 px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[10px] tracking-widest uppercase text-zinc-300 font-mono z-10">
+              1:1 &bull; Criativo Ads
+            </div>
+          </div>
+
+          <!-- Metadados / Título / Descrição -->
+          <div class="p-5 sm:p-6 border-t border-white/[0.04] bg-surface-card flex flex-col justify-between flex-grow">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-[11px] font-mono text-zinc-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/[0.06]">
+                  Criativo de Conversão
+                </span>
+                <span class="text-[11px] font-mono text-zinc-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/[0.06]">
+                  Autoridade & Retenção
+                </span>
+              </div>
+              <h3 class="font-semibold text-base sm:text-lg text-white tracking-tight">
+                Criativo de Autoridade e Retenção
+              </h3>
+              <p class="mt-2 text-sm text-zinc-400 leading-relaxed font-light">
+                Criativo desenvolvido para agência de marketing com foco em captação. Estruturado com elementos visuais de interface para atrair o clique e reforçar o ecossistema da marca.
+              </p>
+            </div>
+          </div>
+        </article>
+
+
+        <!-- ARTE 4 (Design Analítico Cimed) -->
+        <article class="media-card group bg-surface-card rounded-2xl border border-surface-border hover:border-surface-borderHover overflow-hidden flex flex-col">
+          <div 
+            class="relative w-full aspect-square bg-zinc-950 overflow-hidden cursor-pointer" 
+            onclick="openLightbox('Imagem%20do%20Codex%2010%20de%20set.%20de%202026,%2015_15_18.png', 'Design Analítico & Contraste', 'Design Analítico &bull; Cimed & Carmed Fini')"
+          >
+            <img 
+              src="Imagem%20do%20Codex%2010%20de%20set.%20de%202026,%2015_15_18.png" 
+              alt="Design Analítico & Contraste"
+              class="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+              loading="lazy"
+              onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1200&auto=format&fit=crop';"
+            />
+
+            <!-- Gradiente discreto -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10 pointer-events-none"></div>
+
+            <!-- Botão Expandir / Lightbox -->
+            <button 
+              type="button"
+              onclick="event.stopPropagation(); openLightbox('Imagem%20do%20Codex%2010%20de%20set.%20de%202026,%2015_15_18.png', 'Design Analítico & Contraste', 'Design Analítico &bull; Cimed & Carmed Fini')"
+              class="absolute top-3 right-3 sm:top-4 sm:right-4 w-9 h-9 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-white flex items-center justify-center opacity-90 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-200 hover:bg-white hover:text-black active:scale-90 shadow-lg z-20"
+              title="Expandir Imagem"
+              aria-label="Expandir Imagem"
+            >
+              <i data-lucide="maximize-2" class="w-4 h-4"></i>
+            </button>
+
+            <!-- Badge de Formato -->
+            <div class="absolute top-3 left-3 sm:top-4 sm:left-4 px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[10px] tracking-widest uppercase text-zinc-300 font-mono z-10">
+              1:1 &bull; Editorial
+            </div>
+          </div>
+
+          <!-- Metadados / Título / Descrição -->
+          <div class="p-5 sm:p-6 border-t border-white/[0.04] bg-surface-card flex flex-col justify-between flex-grow">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-[11px] font-mono text-zinc-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/[0.06]">
+                  Design Analítico
+                </span>
+                <span class="text-[11px] font-mono text-zinc-400 bg-white/[0.04] px-2 py-0.5 rounded border border-white/[0.06]">
+                  Branding Estratégico
+                </span>
+              </div>
+              <h3 class="font-semibold text-base sm:text-lg text-white tracking-tight">
+                Design Analítico & Contraste
+              </h3>
+              <p class="mt-2 text-sm text-zinc-400 leading-relaxed font-light">
+                Layout criado para educar a audiência através de estudos de caso. A paleta de cores direciona a atenção para a mensagem principal em frações de segundo.
+              </p>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ==================== DISCIPLINAS & FERRAMENTAS ==================== -->
+    <section id="competencias" class="max-w-6xl mx-auto px-6 sm:px-8 py-16 border-t border-white/[0.06]">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-left">
+        
+        <div class="p-5 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+          <span class="text-xs text-zinc-500 font-mono block mb-1">01 / Motion</span>
+          <h4 class="text-sm font-semibold text-white mb-2">Edição de Vídeo</h4>
+          <p class="text-xs text-zinc-400 leading-relaxed">
+            Reels, cortes verticais de alta retenção e transições precisas via CapCut e Premiere.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+          <span class="text-xs text-zinc-500 font-mono block mb-1">02 / Branding</span>
+          <h4 class="text-sm font-semibold text-white mb-2">Identidade Visual</h4>
+          <p class="text-xs text-zinc-400 leading-relaxed">
+            Sistemas gráficos, tipografia consistente e posicionamento estético através do Figma.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+          <span class="text-xs text-zinc-500 font-mono block mb-1">03 / Ads</span>
+          <h4 class="text-sm font-semibold text-white mb-2">Criativos de Performance</h4>
+          <p class="text-xs text-zinc-400 leading-relaxed">
+            Design orientado à conversão para campanhas em Meta Ads e formatos digitais.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+          <span class="text-xs text-zinc-500 font-mono block mb-1">04 / Editorial</span>
+          <h4 class="text-sm font-semibold text-white mb-2">Direção de Arte</h4>
+          <p class="text-xs text-zinc-400 leading-relaxed">
+            Tratamento fotográfico, carrosséis explicativos e curadoria visual de alto padrão.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 4. FOOTER SIMPLES & DISCRETO ==================== -->
+    <footer id="contato" class="border-t border-white/[0.08] bg-[#09090b] py-16 sm:py-20">
+      <div class="max-w-6xl mx-auto px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-8 text-center sm:text-left">
+        
+        <!-- Mensagem de Agradecimento Simples (Sem vendas forçadas) -->
+        <div class="max-w-md">
+          <p class="text-base sm:text-lg font-medium text-zinc-200">
+            Obrigado pela visita.
+          </p>
+          <p class="text-xs sm:text-sm text-zinc-500 mt-1">
+            Arquivo visual por Rafael Camargo. Direção de arte, motion e design gráfico.
+          </p>
+        </div>
+
+        <!-- Botão Discreto de WhatsApp & Links -->
+        <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+          <a 
+            href="https://wa.me/5547999364927" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-full bg-white/[0.06] hover:bg-white/10 border border-white/10 text-white text-xs sm:text-sm font-medium transition-all duration-200 active:scale-95"
+          >
+            <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i>
+            <span>Conversar no WhatsApp</span>
+            <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 opacity-50"></i>
+          </a>
+
+          <!-- Social Links Rápidos -->
+          <div class="flex items-center justify-center gap-4 text-xs text-zinc-400 pl-0 sm:pl-2 py-1">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors py-1">Instagram</a>
+            <span>&bull;</span>
+            <a href="https://behance.net" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors py-1">Behance</a>
+            <span>&bull;</span>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors py-1">LinkedIn</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Copyright discreto -->
+      <div class="max-w-6xl mx-auto px-6 sm:px-8 mt-12 pt-6 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between text-[11px] text-zinc-600 gap-2">
+        <span>&copy; 2026 Rafael Camargo. Todos os direitos reservados.</span>
+        <span>Santa Catarina, Brasil</span>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- ==================== MODAL / LIGHTBOX DE IMAGENS ==================== -->
+  <div 
+    id="lightbox-modal" 
+    class="fixed inset-0 z-50 bg-black/95 backdrop-blur-md hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4 sm:p-8"
+    onclick="closeLightbox(event)"
+  >
+    <button 
+      onclick="closeLightbox(event, true)"
+      class="absolute top-4 right-4 sm:top-6 sm:right-6 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors z-50 border border-white/10 active:scale-90"
+      aria-label="Fechar Modal"
+    >
+      <i data-lucide="x" class="w-5 h-5"></i>
+    </button>
+
+    <div class="max-w-4xl w-full max-h-[90vh] flex flex-col items-center justify-center" onclick="event.stopPropagation()">
+      <div class="relative max-h-[70vh] sm:max-h-[78vh] w-auto overflow-hidden rounded-xl border border-white/10 shadow-2xl bg-black">
+        <img id="lightbox-img" src="" alt="Ampliação" class="max-h-[70vh] sm:max-h-[78vh] max-w-full w-auto object-contain mx-auto" />
+      </div>
+
+      <div class="mt-4 text-center px-4">
+        <h4 id="lightbox-title" class="text-base sm:text-lg font-semibold text-white tracking-tight"></h4>
+        <p id="lightbox-tags" class="text-xs text-zinc-400 font-mono mt-0.5"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== CONTROLES & SCRIPTS ==================== -->
+  <script>
+    // Inicializar Ícones Lucide
+    lucide.createIcons();
+
+    // Menu Mobile com alternância do ícone menu/x
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    if (mobileBtn && mobileMenu) {
+      mobileBtn.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.toggle('hidden');
+        if (menuIcon) {
+          menuIcon.setAttribute('data-lucide', isHidden ? 'menu' : 'x');
+          lucide.createIcons();
+        }
+      });
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          if (menuIcon) {
+            menuIcon.setAttribute('data-lucide', 'menu');
+            lucide.createIcons();
+          }
+        });
+      });
+    }
+
+    // Controle Individual e Inteligente de Play/Pause nos Vídeos
+    function togglePlay(videoId, btnId, iconId) {
+      const video = document.getElementById(videoId);
+      const btn = document.getElementById(btnId);
+      const icon = document.getElementById(iconId);
+      if (!video) return;
+
+      // Pausar outros vídeos que possam estar tocando
+      document.querySelectorAll('video').forEach(v => {
+        if (v !== video && !v.paused) {
+          v.pause();
+          const otherBtn = v.parentElement.querySelector('button[id^="btn-play-"]');
+          const otherIcon = v.parentElement.querySelector('i[id^="icon-play-"]');
+          if (otherBtn) otherBtn.classList.remove('opacity-0');
+          if (otherIcon) otherIcon.setAttribute('data-lucide', 'play');
+        }
+      });
+
+      if (video.paused) {
+        video.play();
+        if (btn) btn.classList.add('opacity-0');
+        if (icon) icon.setAttribute('data-lucide', 'pause');
+      } else {
+        video.pause();
+        if (btn) btn.classList.remove('opacity-0');
+        if (icon) icon.setAttribute('data-lucide', 'play');
+      }
+      lucide.createIcons();
+    }
+
+    // Controle de Mudo
+    function toggleMute(videoId, iconId) {
+      const video = document.getElementById(videoId);
+      const icon = document.getElementById(iconId);
+      if (!video) return;
+
+      video.muted = !video.muted;
+      if (icon) {
+        icon.setAttribute('data-lucide', video.muted ? 'volume-x' : 'volume-2');
+      }
+      lucide.createIcons();
+    }
+
+    // Barras de Progresso dos Vídeos
+    function setupVideoProgress(videoId, progressId, btnId, iconId) {
+      const video = document.getElementById(videoId);
+      const bar = document.getElementById(progressId);
+      const btn = document.getElementById(btnId);
+      const icon = document.getElementById(iconId);
+
+      if (!video || !bar) return;
+
+      video.addEventListener('timeupdate', () => {
+        if (video.duration) {
+          const pct = (video.currentTime / video.duration) * 100;
+          bar.style.width = pct + '%';
+        }
+      });
+
+      video.addEventListener('ended', () => {
+        if (btn) btn.classList.remove('opacity-0');
+        if (icon) icon.setAttribute('data-lucide', 'play');
+        lucide.createIcons();
+      });
+
+      // Exibir botão de play no hover quando pausado ou rodando
+      const container = video.parentElement;
+      container.addEventListener('mouseenter', () => {
+        if (btn) btn.classList.remove('opacity-0');
+      });
+      container.addEventListener('mouseleave', () => {
+        if (btn && !video.paused) btn.classList.add('opacity-0');
+      });
+    }
+
+    setupVideoProgress('video-item-1', 'progress-1', 'btn-play-1', 'icon-play-1');
+    setupVideoProgress('video-item-2', 'progress-2', 'btn-play-2', 'icon-play-2');
+
+    // Lightbox / Zoom das Imagens
+    function openLightbox(src, title, tags) {
+      const modal = document.getElementById('lightbox-modal');
+      const img = document.getElementById('lightbox-img');
+      const titleElem = document.getElementById('lightbox-title');
+      const tagsElem = document.getElementById('lightbox-tags');
+
+      img.src = src;
+      titleElem.textContent = title;
+      tagsElem.innerHTML = tags;
+
+      modal.classList.remove('hidden');
+      setTimeout(() => modal.classList.remove('opacity-0'), 10);
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(event, force = false) {
+      const modal = document.getElementById('lightbox-modal');
+      if (force || event.target === modal) {
+        modal.classList.add('opacity-0');
+        setTimeout(() => {
+          modal.classList.add('hidden');
+          document.getElementById('lightbox-img').src = '';
+        }, 300);
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox(null, true);
+    });
+
+    // Spotlight sutil de cursor no desktop
+    window.addEventListener('mousemove', (e) => {
+      document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+      document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+    });
+
+    // Sombra sutil na navbar ao rolar
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('main-header');
+      if (window.scrollY > 30) {
+        header.classList.add('bg-[#09090b]/95', 'shadow-lg', 'shadow-black/50');
+      } else {
+        header.classList.remove('bg-[#09090b]/95', 'shadow-lg', 'shadow-black/50');
+      }
+    });
+  </script>
+</body>
+</html>
